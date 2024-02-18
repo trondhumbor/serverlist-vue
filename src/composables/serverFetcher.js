@@ -15,6 +15,10 @@ class ServerFetcher {
           if (this.serverlistStore.hasVisitedServer(element)) {
             return;
           }
+
+          if (!this.#validateIpAddress(element.split(":")[0])) {
+            return;
+          }
   
           this.fetch_server_info(element);
           this.serverlistStore.addVisitedServer(element);
@@ -37,6 +41,40 @@ class ServerFetcher {
         this.serverlistStore.reset();
 
         this.fetch_server_list(base);
+    }
+
+    #validateIpAddress(address) {
+        // check valid IP
+        if (!/^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/g.test(address)) {
+            return false;
+        }
+
+        return this.#isLocalSubnet(address);
+    }
+
+    #isLocalSubnet(address) {
+        let ip_components = address.split(".").map(Number);
+
+        if (ip_components.length != 4) {
+            return false;
+        }
+
+        // 10.x.x.x
+        if (ip_components[0] == 10) {
+            return false;
+        }
+
+        // 172.16.x.x - 172.31.x.x
+        if (ip_components[0] == 172 && (ip_components[1] >= 16 && ip_components[1] <= 31)) {
+            return false;
+        }
+
+        // 192.168.x.x
+        if (ip_components[0] == 192 && ip_components[1] == 168) {
+            return false;
+        }
+
+        return true;
     }
 }
 
