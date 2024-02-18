@@ -50,37 +50,37 @@ class ServerFetcher {
         }
 
         // if local subnet, we count it as invalid
-        return !this.#isLocalSubnet(address);
+        return this.#isAllowedSubnet(address);
     }
 
-    #isLocalSubnet(address) {
+    #isAllowedSubnet(address) {
         let components = address.split(".").map(Number);
 
         if (components.length != 4) {
-            return true;
+            return false;
         }
 
         // 10.x.x.x
         if (components[0] == 10) {
-            return true;
+            return false;
         }
 
         // 172.16.x.x - 172.31.x.x
         if (components[0] == 172 && (components[1] >= 16 && components[1] <= 31)) {
-            return true;
+            return false;
         }
 
         // 192.168.x.x
         if (components[0] == 192 && components[1] == 168) {
-            return true;
+            return false;
         }
 
         // localhost
         if (address.toLowerCase() === "127.0.0.1" || address.toLowerCase() === "localhost") {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 }
 
