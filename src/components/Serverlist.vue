@@ -28,38 +28,38 @@ export default {
   created() {},
   methods: {
     hostname_comparator(a, b) {
-      var nameA = remove_color_codes(a.status.sv_hostname)?.toUpperCase() || "";
-      var nameB = remove_color_codes(b.status.sv_hostname)?.toUpperCase() || "";
+      const nameA = remove_color_codes(a.status.sv_hostname)?.toUpperCase() || "";
+      const nameB = remove_color_codes(b.status.sv_hostname)?.toUpperCase() || "";
       return this.comparator(nameA, nameB, this.toggles["hostname"]);
     },
     map_comparator(a, b) {
-      var mapA = a.status.mapname?.toUpperCase() || "";
-      var mapB = b.status.mapname?.toUpperCase() || "";
+      const mapA = a.status.mapname?.toUpperCase() || "";
+      const mapB = b.status.mapname?.toUpperCase() || "";
       return this.comparator(mapA, mapB, this.toggles["map"]);
     },
     gamemode_comparator(a, b) {
-      var modeA = a.status.g_gametype?.toUpperCase() || "";
-      var modeB = b.status.g_gametype?.toUpperCase() || "";
+      const modeA = a.status.g_gametype?.toUpperCase() || "";
+      const modeB = b.status.g_gametype?.toUpperCase() || "";
       return this.comparator(modeA, modeB, this.toggles["gamemode"]);
     },
     mod_comparator(a, b) {
-      var modA = a.status.fs_game?.toUpperCase() || "";
-      var modB = b.status.fs_game?.toUpperCase() || "";
+      const modA = a.status.fs_game?.toUpperCase() || "";
+      const modB = b.status.fs_game?.toUpperCase() || "";
       return this.comparator(modA, modB, this.toggles["mod"]);
     },
     clients_comparator(a, b) {
-      var clientsA = a.players.length - a.players.filter(this.is_bot).length;
-      var clientsB = b.players.length - b.players.filter(this.is_bot).length;
+      const clientsA = a.players.length - a.players.filter(this.is_bot).length;
+      const clientsB = b.players.length - b.players.filter(this.is_bot).length;
       return this.comparator(clientsA, clientsB, this.toggles["clients"]);
     },
     ip_comparator(a, b) {
-      var ipA = a.ip;
-      var ipB = b.ip;
+      const ipA = a.ip;
+      const ipB = b.ip;
       return this.comparator(ipA, ipB, this.toggles["ip"]);
     },
     version_comparator(a, b) {
-      var versionA = a.status?.shortversion || "";
-      var versionB = b.status?.shortversion || "";
+      const versionA = a.status?.shortversion || "";
+      const versionB = b.status?.shortversion || "";
       return this.comparator(versionA, versionB, this.toggles["version"]);
     },
     comparator(a, b, toggle=false) {

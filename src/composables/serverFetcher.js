@@ -54,7 +54,7 @@ class ServerFetcher {
     }
 
     #isAllowedSubnet(address) {
-        let components = address.split(".").map(Number);
+        const components = address.split(".").map(Number);
 
         if (components.length != 4) {
             return false;
