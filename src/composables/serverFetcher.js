@@ -74,6 +74,11 @@ class ServerFetcher {
             return false;
         }
 
+        // localhost
+        if (address.toLowerCase() === "127.0.0.1" || address.toLowerCase() === "localhost") {
+            return false;
+        }
+
         return true;
     }
 }
