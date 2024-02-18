@@ -16,7 +16,7 @@ class ServerFetcher {
             return;
           }
 
-          if (!this.#validateIpAddress(element.split(":")[0])) {
+          if (!this.isValidIpAddress(element.split(":")[0])) {
             return;
           }
   
@@ -43,43 +43,44 @@ class ServerFetcher {
         this.fetch_server_list(base);
     }
 
-    #validateIpAddress(address) {
+    isValidIpAddress(address) {
         // check valid IP
         if (!/^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/g.test(address)) {
             return false;
         }
 
-        return this.#isLocalSubnet(address);
+        // if local subnet, we count it as invalid
+        return !this.#isLocalSubnet(address);
     }
 
     #isLocalSubnet(address) {
-        let ip_components = address.split(".").map(Number);
+        let components = address.split(".").map(Number);
 
-        if (ip_components.length != 4) {
-            return false;
+        if (components.length != 4) {
+            return true;
         }
 
         // 10.x.x.x
-        if (ip_components[0] == 10) {
-            return false;
+        if (components[0] == 10) {
+            return true;
         }
 
         // 172.16.x.x - 172.31.x.x
-        if (ip_components[0] == 172 && (ip_components[1] >= 16 && ip_components[1] <= 31)) {
-            return false;
+        if (components[0] == 172 && (components[1] >= 16 && components[1] <= 31)) {
+            return true;
         }
 
         // 192.168.x.x
-        if (ip_components[0] == 192 && ip_components[1] == 168) {
-            return false;
+        if (components[0] == 192 && components[1] == 168) {
+            return true;
         }
 
         // localhost
         if (address.toLowerCase() === "127.0.0.1" || address.toLowerCase() === "localhost") {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 }
 
