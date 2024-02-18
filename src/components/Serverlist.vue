@@ -58,8 +58,8 @@ export default {
       return this.comparator(ipA, ipB, this.toggles["ip"]);
     },
     version_comparator(a, b) {
-      const versionA = a.status?.shortversion || "";
-      const versionB = b.status?.shortversion || "";
+      const versionA = a.status.shortversion || "";
+      const versionB = b.status.shortversion || "";
       return this.comparator(versionA, versionB, this.toggles["version"]);
     },
     comparator(a, b, toggle=false) {
