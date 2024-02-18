@@ -16,7 +16,7 @@ class ServerFetcher {
             return;
           }
 
-          if (!this.isValidIpAddress(element.split(":")[0])) {
+          if (!this.#isValidIpAddress(element.split(":")[0])) {
             return;
           }
   
@@ -43,7 +43,7 @@ class ServerFetcher {
         this.fetch_server_list(base);
     }
 
-    isValidIpAddress(address) {
+    #isValidIpAddress(address) {
         // check valid IP
         if (!/^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/g.test(address)) {
             return false;
