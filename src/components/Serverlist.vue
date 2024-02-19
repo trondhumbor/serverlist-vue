@@ -77,7 +77,7 @@ export default {
   },
   mounted() {
     this.serverlistStore.list.forEach(s => s.show = true);
-    new ServerFetcher(this.serverlistStore).update_servers();
+    new ServerFetcher().update_servers();
   },
 }
 
