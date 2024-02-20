@@ -86,10 +86,8 @@ export default {
 <template>
   <header>
     <div>Servers: {{ this.serverlistStore.list.length }} Visited servers: {{ this.serverlistStore.visited_servers.length }} Players: {{
-      this.serverlistStore.list.reduce((partialSum, a) => partialSum + a.players.length, 0)
-    }} <div title="Number of bots">({{
-      this.serverlistStore.list.reduce((partialSum, a) => partialSum + a.players.filter(this.is_bot).length, 0)
-    }} bots)</div>
+      this.serverlistStore.getPlayerAmount - this.serverlistStore.getBotAmount
+    }} <div title="Number of bots">({{ this.serverlistStore.getBotAmount }} bots)</div>
     </div>
     
     <input type="text" placeholder="Search for hostname" @input="event => {

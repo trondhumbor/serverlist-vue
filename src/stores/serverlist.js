@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ServerInfo } from '@/composables/serverInfo';
+import { is_bot } from '@/composables/isBot';
 
 const LOCALSTORAGE_LIST = "list";
 const LOCALSTORAGE_VISITED_SERVERS = "visited_servers";
@@ -16,7 +17,13 @@ export const useServerlistStore = defineStore({
     },
     getVisitedServers() {
       return this.visited_servers;
-    }
+    },
+    getPlayerAmount() {
+      return this.list.reduce((partialSum, a) => partialSum + a.players.length, 0);
+    },
+    getBotAmount() {
+      return this.list.reduce((partialSum, a) => partialSum + a.players.filter(is_bot).length, 0);
+    },
   },
   actions: {
     addServer(server) {
