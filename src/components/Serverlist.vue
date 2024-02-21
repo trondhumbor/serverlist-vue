@@ -86,7 +86,7 @@ export default {
 <template>
   <header>
     <div>Servers: {{ this.serverlistStore.list.length }} Visited servers: {{ this.serverlistStore.visited_servers.length }} Players: {{
-      this.serverlistStore.getPlayerAmount - this.serverlistStore.getBotAmount
+      this.serverlistStore.getPlayerAmount
     }} <div title="Number of bots">({{ this.serverlistStore.getBotAmount }} bots)</div>
     </div>
     

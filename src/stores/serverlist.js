@@ -18,11 +18,14 @@ export const useServerlistStore = defineStore({
     getVisitedServers() {
       return this.visited_servers;
     },
-    getPlayerAmount() {
+    getClientAmount() {
       return this.list.reduce((partialSum, a) => partialSum + a.players.length, 0);
     },
     getBotAmount() {
       return this.list.reduce((partialSum, a) => partialSum + a.players.filter(is_bot).length, 0);
+    },
+    getPlayerAmount() {
+      return this.getClientAmount - this.getBotAmount;
     },
   },
   actions: {
