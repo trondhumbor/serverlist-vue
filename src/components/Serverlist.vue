@@ -28,23 +28,23 @@ export default {
   created() {},
   methods: {
     hostname_comparator(a, b) {
-      const nameA = remove_color_codes(a.status.sv_hostname)?.toUpperCase() || "";
-      const nameB = remove_color_codes(b.status.sv_hostname)?.toUpperCase() || "";
+      const nameA = remove_color_codes(a.status.sv_hostname)?.toLowerCase() || "";
+      const nameB = remove_color_codes(b.status.sv_hostname)?.toLowerCase() || "";
       return this.comparator(nameA, nameB, this.toggles["hostname"]);
     },
     map_comparator(a, b) {
-      const mapA = a.status.mapname?.toUpperCase() || "";
-      const mapB = b.status.mapname?.toUpperCase() || "";
+      const mapA = a.status.mapname?.toLowerCase() || "";
+      const mapB = b.status.mapname?.toLowerCase() || "";
       return this.comparator(mapA, mapB, this.toggles["map"]);
     },
     gamemode_comparator(a, b) {
-      const modeA = a.status.g_gametype?.toUpperCase() || "";
-      const modeB = b.status.g_gametype?.toUpperCase() || "";
+      const modeA = a.status.g_gametype?.toLowerCase() || "";
+      const modeB = b.status.g_gametype?.toLowerCase() || "";
       return this.comparator(modeA, modeB, this.toggles["gamemode"]);
     },
     mod_comparator(a, b) {
-      const modA = a.status.fs_game?.toUpperCase() || "";
-      const modB = b.status.fs_game?.toUpperCase() || "";
+      const modA = a.status.fs_game?.toLowerCase() || "";
+      const modB = b.status.fs_game?.toLowerCase() || "";
       return this.comparator(modA, modB, this.toggles["mod"]);
     },
     clients_comparator(a, b) {
@@ -92,13 +92,13 @@ export default {
     
     <input type="text" placeholder="Search for hostname" @input="event => {
       this.serverlistStore.list
-        .forEach(server => server.show = server.status.sv_hostname.toUpperCase().includes(event.target.value.toUpperCase()));
+        .forEach(server => server.show = server.status.sv_hostname.toLowerCase().includes(event.target.value.toLowerCase()));
     } ">
     
     <input type="text" placeholder="Search for player" @input="event => {
       this.serverlistStore.list
         .forEach(server => server.show = server.players.some(element =>
-          element.name.toUpperCase().includes(event.target.value.toUpperCase())
+          element.name.toLowerCase().includes(event.target.value.toLowerCase())
         ));
     } ">
   </header>
