@@ -84,7 +84,7 @@ export default {
         <td>{{ player.name }}</td>
         <td>{{ player.ping }}</td>
         <td>{{ player.score }}</td>
-        <td>{{ is_bot(player) ? "🤖" : "🧑"}}</td>
+        <td :title="is_bot(player) ? 'Bot' : 'Human'">{{ is_bot(player) ? "🤖" : "🧑"}}</td>
       </tbody>
     </table>
 
